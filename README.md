@@ -7,7 +7,8 @@
 
 **Atata.AspNetCore** is a .NET library that adds ASP.NET Core sessions to [Atata](https://github.com/atata-framework/atata) using `WebApplicationFactory<TEntryPoint>`.
 
-*The package targets .NET Standard 2.0, which supports .NET 5+, .NET Framework 4.6.1+ and .NET Core/Standard 2.0+.*
+*The package targets .NET 8/9/10 depending on the version of the chosen library.
+For example, for ASP.NET Core 8 project, use Atata.AspNetCore.v8.*
 
 ## Community
 

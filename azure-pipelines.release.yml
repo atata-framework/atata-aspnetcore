@@ -1,0 +1,31 @@
+variables:
+  netSdkVersion: '9.x'
+
+trigger: none
+pr: none
+
+jobs:
+- job: PublishPackage
+  displayName: Publish package to NuGet
+  pool:
+    vmImage: windows-latest
+  steps:
+  - task: NuGetToolInstaller@1
+    displayName: Install NuGet tool
+  - task: UseDotNet@2
+    displayName: Set up .NET SDK
+    inputs:
+      version: $(netSdkVersion)
+  - task: DotNetCoreCLI@2
+    displayName: Pack
+    inputs:
+      command: pack
+      packagesToPack: 'src/*/*.csproj'
+      configuration: 'Release'
+  - task: NuGetCommand@2
+    displayName: NuGet push
+    inputs:
+      command: push
+      packagesToPush: '$(Build.ArtifactStagingDirectory)/*.nupkg'
+      nuGetFeedType: 'external'
+      publishFeedCredentials: 'NuGet'

@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Atata.AspNetCore.v8\Atata.AspNetCore.v8.csproj" />
+    <ProjectReference Include="..\..\src\Atata.AspNetCore\Atata.AspNetCore.v8.csproj" />
     <ProjectReference Include="..\Atata.AspNetCore.v8.TestApp\Atata.AspNetCore.v8.TestApp.csproj" />
   </ItemGroup>
 

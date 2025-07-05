@@ -5,7 +5,7 @@
     <RootNamespace>Atata.AspNetCore</RootNamespace>
     <Version>4.0.0-beta.1</Version>
     <Description>
-.NET library that adds ASP.NET Core sessions to Atata using WebApplicationFactory.
+.NET library that adds ASP.NET Core 8.0 sessions to Atata using WebApplicationFactory.
 
 The package targets .NET 8.0.
     </Description>

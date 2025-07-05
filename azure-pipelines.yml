@@ -1,0 +1,58 @@
+variables:
+  buildConfiguration: 'Release'
+
+jobs:
+- job: BuildAndRunCodeAnalysis
+  displayName: Build and run code analysis
+  pool:
+    vmImage: windows-latest
+  steps:
+  - task: UseDotNet@2
+    displayName: Set up .NET SDK 8
+    inputs:
+      version: '8.x'
+  - task: UseDotNet@2
+    displayName: Set up .NET SDK 9
+    inputs:
+      version: '9.x'
+  - task: DotNetCoreCLI@2
+    displayName: Build solution with code analysis
+    inputs:
+      command: build
+      projects: '**/*.sln'
+      arguments: -c $(buildConfiguration) -warnaserror
+
+- job: RunTests
+  displayName: Run tests on
+  strategy:
+    matrix:
+      Linux:
+        imageName: 'ubuntu-latest'
+      macOS:
+        imageName: 'macOS-latest'
+      Windows:
+        imageName: 'windows-latest'
+  pool:
+    vmImage: $(imageName)
+  steps:
+  - task: UseDotNet@2
+    displayName: Set up .NET SDK 8
+    inputs:
+      version: '8.x'
+  - task: UseDotNet@2
+    displayName: Set up .NET SDK 9
+    inputs:
+      version: '9.x'
+  - task: DotNetCoreCLI@2
+    displayName: Build solution
+    inputs:
+      command: build
+      projects: '**/*.sln'
+      arguments: -c $(buildConfiguration) -p:RunAnalyzers=false
+  - task: DotNetCoreCLI@2
+    displayName: Run tests
+    timeoutInMinutes: 10
+    inputs:
+      command: test
+      projects: '**/*Tests.csproj'
+      arguments: -c $(buildConfiguration) -s "azure-pipelines.runsettings" --no-build

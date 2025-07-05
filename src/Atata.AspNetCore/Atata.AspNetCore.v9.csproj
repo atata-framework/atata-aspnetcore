@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <RootNamespace>Atata.AspNetCore</RootNamespace>
+    <Version>4.0.0-beta.1</Version>
+    <Description>
+.NET library that adds ASP.NET Core 9.0 sessions to Atata using WebApplicationFactory.
+
+The package targets .NET 9.0.
+    </Description>
+    <RepositoryUrl>https://github.com/atata-framework/atata-aspnetcore</RepositoryUrl>
+    <PackageId>Atata.AspNetCore</PackageId>
+    <PackageTags>atata automation testing test aspnetcore aspnetcoremvc aspnetcoremvctesting</PackageTags>
+    <PackageReleaseNotes></PackageReleaseNotes>
+    <PackageProjectUrl>https://atata.io</PackageProjectUrl>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Atata" Version="4.0.0-beta.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="9.0.6" />
+    <PackageReference Include="Microsoft.Extensions.Diagnostics.Testing" Version="9.6.0" />
+  </ItemGroup>
+
+</Project>

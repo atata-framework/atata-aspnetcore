@@ -23,9 +23,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atata.AspNetCore.v8", "src\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atata.AspNetCore.TestApp", "test\Atata.AspNetCore.TestApp\Atata.AspNetCore.TestApp.csproj", "{024D62F2-5AFF-26D6-E55E-BDB8676B9A5A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atata.AspNetCore.IntegrationTests", "test\Atata.AspNetCore.IntegrationTests\Atata.AspNetCore.IntegrationTests.csproj", "{9A37CC52-B336-9BBD-ADC2-68FF1359C7BC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atata.AspNetCore.v8.IntegrationTests", "test\Atata.AspNetCore.IntegrationTests\Atata.AspNetCore.v8.IntegrationTests.csproj", "{9A37CC52-B336-9BBD-ADC2-68FF1359C7BC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atata.AspNetCore.v9", "src\Atata.AspNetCore\Atata.AspNetCore.v9.csproj", "{4C468F74-6DF7-0B0E-F4B7-DFD58FA03BFE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atata.AspNetCore.v9.IntegrationTests", "test\Atata.AspNetCore.IntegrationTests\Atata.AspNetCore.v9.IntegrationTests.csproj", "{D23F5C61-0789-F1B3-EA12-F1EAE4F01170}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -49,6 +51,10 @@ Global
 		{4C468F74-6DF7-0B0E-F4B7-DFD58FA03BFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4C468F74-6DF7-0B0E-F4B7-DFD58FA03BFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4C468F74-6DF7-0B0E-F4B7-DFD58FA03BFE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D23F5C61-0789-F1B3-EA12-F1EAE4F01170}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D23F5C61-0789-F1B3-EA12-F1EAE4F01170}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D23F5C61-0789-F1B3-EA12-F1EAE4F01170}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D23F5C61-0789-F1B3-EA12-F1EAE4F01170}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

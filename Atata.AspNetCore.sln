@@ -21,7 +21,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atata.AspNetCore.v8", "src\Atata.AspNetCore\Atata.AspNetCore.v8.csproj", "{E11A532D-76BF-3CB8-4D15-DA2CD7427579}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atata.AspNetCore.v8.TestApp", "test\Atata.AspNetCore.v8.TestApp\Atata.AspNetCore.v8.TestApp.csproj", "{024D62F2-5AFF-26D6-E55E-BDB8676B9A5A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atata.AspNetCore.TestApp", "test\Atata.AspNetCore.TestApp\Atata.AspNetCore.TestApp.csproj", "{024D62F2-5AFF-26D6-E55E-BDB8676B9A5A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atata.AspNetCore.v8.IntegrationTests", "test\Atata.AspNetCore.v8.IntegrationTests\Atata.AspNetCore.v8.IntegrationTests.csproj", "{9A37CC52-B336-9BBD-ADC2-68FF1359C7BC}"
 EndProject

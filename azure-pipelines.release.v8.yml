@@ -12,7 +12,7 @@ jobs:
   - task: UseDotNet@2
     displayName: Set up .NET SDK
     inputs:
-      version: '8.x'
+      version: '9.x'
   - task: DotNetCoreCLI@2
     displayName: Pack
     inputs:

@@ -10,7 +10,7 @@
 The package targets .NET 9.0.
     </Description>
     <RepositoryUrl>https://github.com/atata-framework/atata-aspnetcore</RepositoryUrl>
-    <PackageId>Atata.AspNetCore</PackageId>
+    <PackageId>Atata.AspNetCore.v9</PackageId>
     <PackageTags>atata automation testing test aspnetcore aspnetcoremvc aspnetcoremvctesting</PackageTags>
     <PackageReleaseNotes></PackageReleaseNotes>
     <PackageProjectUrl>https://atata.io</PackageProjectUrl>

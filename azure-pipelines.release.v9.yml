@@ -1,3 +1,6 @@
+variables:
+  netSdkVersion: '9.x'
+
 trigger: none
 pr: none
 
@@ -12,7 +15,7 @@ jobs:
   - task: UseDotNet@2
     displayName: Set up .NET SDK
     inputs:
-      version: '9.x'
+      version: $(netSdkVersion)
   - task: DotNetCoreCLI@2
     displayName: Pack
     inputs:

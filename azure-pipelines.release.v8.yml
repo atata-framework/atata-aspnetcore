@@ -1,6 +1,3 @@
-variables:
-  netSdkVersion: '9.x'
-
 trigger: none
 pr: none
 
@@ -15,12 +12,12 @@ jobs:
   - task: UseDotNet@2
     displayName: Set up .NET SDK
     inputs:
-      version: $(netSdkVersion)
+      version: '8.x'
   - task: DotNetCoreCLI@2
     displayName: Pack
     inputs:
       command: pack
-      packagesToPack: 'src/*/*.csproj'
+      packagesToPack: 'src/*/*.v8.csproj'
       configuration: 'Release'
   - task: NuGetCommand@2
     displayName: NuGet push

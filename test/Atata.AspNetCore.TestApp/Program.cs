@@ -13,7 +13,8 @@ app.MapGet("/ping", (ILogger<Program> logger) =>
     return "pong";
 });
 
-await app.RunAsync();
+await app.RunAsync()
+    .ConfigureAwait(false);
 
 public partial class Program
 {

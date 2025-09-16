@@ -5,7 +5,7 @@
 [![Atata docs](https://img.shields.io/badge/docs-Atata_Framework-orange.svg)](https://atata.io)
 [![X](https://img.shields.io/badge/follow-@AtataFramework-blue.svg)](https://x.com/AtataFramework)
 
-**Atata.AspNetCore** is a .NET library that adds ASP.NET Core sessions to [Atata](https://github.com/atata-framework/atata) using `WebApplicationFactory<TEntryPoint>`.
+**Atata.AspNetCore** is a C#/.NET library that adds ASP.NET Core sessions to [Atata](https://github.com/atata-framework/atata) using `WebApplicationFactory<TEntryPoint>`.
 
 *The package targets .NET 8/9 depending on the version of the chosen library.
 For example, for ASP.NET Core 8 project, use Atata.AspNetCore.v8.*

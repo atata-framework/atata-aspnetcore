@@ -44,6 +44,12 @@ public class WebApplicationSession : AtataSession
     public FakeLogCollector FakeLogCollector =>
         _fakeLogCollector.Value!;
 
+    /// <summary>
+    /// Creates <see cref="WebApplicationSessionBuilder"/> instance for <see cref="WebApplicationSession"/> configuration.
+    /// </summary>
+    /// <returns>The created <see cref="WebApplicationSessionBuilder"/> instance.</returns>
+    public static WebApplicationSessionBuilder CreateBuilder() => new();
+
     /// <inheritdoc cref="WebApplicationFactory{TEntryPoint}.CreateClient()"/>
     public HttpClient CreateClient() =>
         CreateClientFunction.Invoke();

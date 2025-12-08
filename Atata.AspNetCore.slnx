@@ -1,0 +1,24 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path=".editorconfig" />
+    <File Path=".gitattributes" />
+    <File Path=".gitignore" />
+    <File Path="azure-pipelines.codecoverage.runsettings" />
+    <File Path="azure-pipelines.release.v8.yml" />
+    <File Path="azure-pipelines.release.v9.yml" />
+    <File Path="azure-pipelines.runsettings" />
+    <File Path="azure-pipelines.yml" />
+    <File Path="CODE_OF_CONDUCT.md" />
+    <File Path="CONTRIBUTING.md" />
+    <File Path="Directory.Build.props" />
+    <File Path="Directory.Build.targets" />
+    <File Path="en-US_User.dic" />
+    <File Path="LICENSE" />
+    <File Path="README.md" />
+  </Folder>
+  <Project Path="src/Atata.AspNetCore/Atata.AspNetCore.v8.csproj" />
+  <Project Path="src/Atata.AspNetCore/Atata.AspNetCore.v9.csproj" />
+  <Project Path="test/Atata.AspNetCore.IntegrationTests/Atata.AspNetCore.v8.IntegrationTests.csproj" />
+  <Project Path="test/Atata.AspNetCore.IntegrationTests/Atata.AspNetCore.v9.IntegrationTests.csproj" />
+  <Project Path="test/Atata.AspNetCore.TestApp/Atata.AspNetCore.TestApp.csproj" />
+</Solution>

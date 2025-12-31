@@ -16,6 +16,8 @@ app.MapGet("/ping", (ILogger<Program> logger) =>
 await app.RunAsync()
     .ConfigureAwait(false);
 
+#if !NET10_0_OR_GREATER
 public partial class Program
 {
 }
+#endif

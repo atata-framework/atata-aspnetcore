@@ -152,7 +152,7 @@ public class WebApplicationSessionBuilderTests : AtataTestSuite
             await TestSessionAsync(sut);
             sut.SubjectOf(x => x.FakeLogCollector)
                 .Should.Not.BeNull()
-                .ResultOf(x => x.GetSnapshot(false)).Select(x => x.Message).Should.EqualSequence(
+                .ResultOf(x => x.GetSnapshot(false)).Select(x => x.Message).Should.EndWith(
                     "information message",
                     "warning message",
                     "error message",

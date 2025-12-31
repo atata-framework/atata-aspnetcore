@@ -16,8 +16,10 @@
     <File Path="LICENSE" />
     <File Path="README.md" />
   </Folder>
+  <Project Path="src/Atata.AspNetCore/Atata.AspNetCore.v10.csproj" />
   <Project Path="src/Atata.AspNetCore/Atata.AspNetCore.v8.csproj" />
   <Project Path="src/Atata.AspNetCore/Atata.AspNetCore.v9.csproj" />
+  <Project Path="test/Atata.AspNetCore.IntegrationTests/Atata.AspNetCore.v10.IntegrationTests.csproj" />
   <Project Path="test/Atata.AspNetCore.IntegrationTests/Atata.AspNetCore.v8.IntegrationTests.csproj" />
   <Project Path="test/Atata.AspNetCore.IntegrationTests/Atata.AspNetCore.v9.IntegrationTests.csproj" />
   <Project Path="test/Atata.AspNetCore.TestApp/Atata.AspNetCore.TestApp.csproj" />

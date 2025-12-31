@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <RootNamespace>Atata.AspNetCore</RootNamespace>
+    <Version>4.0.0-beta.2</Version>
+    <Description>
+C#/.NET library that adds ASP.NET Core 10.0 sessions to Atata using WebApplicationFactory.
+
+The package targets .NET 10.0.
+    </Description>
+    <RepositoryUrl>https://github.com/atata-framework/atata-aspnetcore</RepositoryUrl>
+    <PackageId>Atata.AspNetCore.v10</PackageId>
+    <PackageTags>atata automation testing test aspnetcore aspnetcoremvc aspnetcoremvctesting</PackageTags>
+    <PackageReleaseNotes></PackageReleaseNotes>
+    <PackageProjectUrl>https://atata.io</PackageProjectUrl>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Atata" Version="4.0.0-beta.11" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="10.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Diagnostics.Testing" Version="10.1.0" />
+  </ItemGroup>
+
+</Project>

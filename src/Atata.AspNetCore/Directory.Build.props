@@ -2,6 +2,7 @@
   <Import Project="$([MSBuild]::GetPathOfFileAbove('Directory.Build.props', '$(MSBuildThisFileDirectory)../'))" />
   
   <PropertyGroup>
+    <Version>4.0.0-beta.3</Version>
     <MSBUildProjectExtensionsPath>obj/$(MSBuildProjectName)/</MSBUildProjectExtensionsPath>
   </PropertyGroup>
   

@@ -4,6 +4,7 @@
     <File Path=".gitattributes" />
     <File Path=".gitignore" />
     <File Path="azure-pipelines.codecoverage.runsettings" />
+    <File Path="azure-pipelines.release.v10.yml" />
     <File Path="azure-pipelines.release.v8.yml" />
     <File Path="azure-pipelines.release.v9.yml" />
     <File Path="azure-pipelines.runsettings" />

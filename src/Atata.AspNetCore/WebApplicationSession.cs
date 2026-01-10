@@ -11,10 +11,18 @@ public class WebApplicationSession : AtataSession
     public WebApplicationSession() =>
         _fakeLogCollector = new(ResolveFakeLogCollector);
 
+#if NET10_0_OR_GREATER
     /// <summary>
-    /// Gets the <see cref="TestServer"/> instance associated with the session.
+    /// Gets the <see cref="Microsoft.AspNetCore.TestHost.TestServer"/> instance associated with the session.
+    /// In case of Kestrel server, the property will be <see langword="null"/>.
     /// </summary>
-    public TestServer Server { get; internal set; } = null!;
+    public TestServer? TestServer { get; internal set; } = null!;
+#else
+    /// <summary>
+    /// Gets the <see cref="Microsoft.AspNetCore.TestHost.TestServer"/> instance associated with the session.
+    /// </summary>
+    public TestServer TestServer { get; internal set; } = null!;
+#endif
 
     /// <summary>
     /// Gets the <see cref="IServiceProvider"/> for resolving application services.

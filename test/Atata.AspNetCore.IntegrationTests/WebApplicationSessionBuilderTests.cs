@@ -139,6 +139,59 @@ public class WebApplicationSessionBuilderTests : AtataTestSuite
         }
     }
 
+#if NET10_0_OR_GREATER
+    public sealed class UseKestrel : WebApplicationSessionBuilderTests
+    {
+        [Test]
+        public async Task WithTrue()
+        {
+            // Act
+            var sut = await BuildWebApplicationSessionAsSubjectAsync(x => x
+                .UseKestrel(true));
+
+            // Assert
+            await TestSessionAsync(sut);
+
+            sut.ValueOf(x => x.CreateDefaultClient().BaseAddress!.Port).Should.Not.Be(80);
+            sut.ValueOf(x => x.ClientOptions.BaseAddress.Port).Should.Not.Be(80);
+        }
+
+        [Test]
+        public async Task WithTrue_WhenThereIsExtraInTestConfiguration()
+        {
+            // Arrange
+            string randomSettingValue = Randomizer.GetString();
+
+            // Act
+            var sut = await BuildWebApplicationSessionAsSubjectAsync(x => x
+                .UseKestrel(true)
+                .UseConfiguration(x => x.UseSetting("TestSetting", randomSettingValue)));
+
+            // Assert
+            sut.ValueOf(x => x.Services.GetRequiredService<IConfiguration>()["TestSetting"])
+                .Should.Be(randomSettingValue);
+        }
+
+        [Test]
+        public async Task WithPort_WhenCustomWebApplicationFactoryIsUsed()
+        {
+            // Act
+            var sut = await BuildWebApplicationSessionAsSubjectAsync(x => x
+                .UseKestrel(25432)
+                .Use(new CustomWebApplicationFactory()));
+
+            // Assert
+            await TestSessionAsync(sut);
+
+            sut.ValueOf(x => x.Services.GetRequiredService<IConfiguration>()[CustomWebApplicationFactory.CustomSetting.Key])
+                .Should.Be(CustomWebApplicationFactory.CustomSetting.Value);
+
+            sut.ValueOf(x => x.CreateDefaultClient().BaseAddress!.Port).Should.Be(25432);
+            sut.ValueOf(x => x.ClientOptions.BaseAddress.Port).Should.Be(25432);
+        }
+    }
+#endif
+
     public sealed class UseCollectApplicationLogs : WebApplicationSessionBuilderTests
     {
         [Test]
@@ -150,14 +203,23 @@ public class WebApplicationSessionBuilderTests : AtataTestSuite
 
             // Assert
             await TestSessionAsync(sut);
-            sut.SubjectOf(x => x.FakeLogCollector)
-                .Should.Not.BeNull()
-                .ResultOf(x => x.GetSnapshot(false)).Select(x => x.Message).Should.EndWith(
-                    "information message",
-                    "warning message",
-                    "error message",
-                    "critical message");
+            AssertTestLogs(sut);
         }
+
+#if NET10_0_OR_GREATER
+        [Test]
+        public async Task WithTrue_WhenUseKestrel()
+        {
+            // Act
+            var sut = await BuildWebApplicationSessionAsSubjectAsync(x => x
+                .UseKestrel(57890)
+                .UseCollectApplicationLogs(true));
+
+            // Assert
+            await TestSessionAsync(sut);
+            AssertTestLogs(sut);
+        }
+#endif
 
         [Test]
         public async Task WithFalse()
@@ -170,6 +232,15 @@ public class WebApplicationSessionBuilderTests : AtataTestSuite
             await TestSessionAsync(sut);
             sut.ValueOf(x => x.FakeLogCollector).Should.BeNull();
         }
+
+        private static void AssertTestLogs(Subject<WebApplicationSession> sut) =>
+            sut.SubjectOf(x => x.FakeLogCollector)
+                .Should.Not.BeNull()
+                .ResultOf(x => x.GetSnapshot(false)).Select(x => x.Message).Should.EndWith(
+                    "information message",
+                    "warning message",
+                    "error message",
+                    "critical message");
     }
 
     public sealed class UseDefaultApplicationLogLevel : WebApplicationSessionBuilderTests

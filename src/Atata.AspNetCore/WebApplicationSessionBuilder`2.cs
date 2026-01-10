@@ -13,6 +13,14 @@ public abstract class WebApplicationSessionBuilder<TSession, TBuilder> : AtataSe
 
     private Action<WebApplicationSession>? _sessionStartAction;
 
+#if NET10_0_OR_GREATER
+    private bool _useKestrel;
+
+    private int? _kestrelPort;
+
+    private Action<KestrelServerOptions>? _configureKestrelOptions;
+#endif
+
     /// <summary>
     /// Gets or sets a value indicating whether to dispose the <see cref="WebApplicationFactory{TEntryPoint}"/>
     /// when <see cref="AtataSession.DisposeAsync()"/> method is invoked.
@@ -77,7 +85,7 @@ public abstract class WebApplicationSessionBuilder<TSession, TBuilder> : AtataSe
     public TBuilder Use<TEntryPoint>()
         where TEntryPoint : class
         =>
-        Use(() => new WebApplicationFactory<TEntryPoint>());
+        Use(() => new AtataWebApplicationFactory<TEntryPoint>());
 
     /// <summary>
     /// Sets the specified <see cref="WebApplicationFactory{TEntryPoint}"/> instance to use for the session.
@@ -104,7 +112,7 @@ public abstract class WebApplicationSessionBuilder<TSession, TBuilder> : AtataSe
         =>
         Use(() =>
         {
-            WebApplicationFactory<TEntryPoint> webApplicationFactory = new();
+            AtataWebApplicationFactory<TEntryPoint> webApplicationFactory = new();
             configure?.Invoke(webApplicationFactory);
             return webApplicationFactory;
         });
@@ -122,11 +130,44 @@ public abstract class WebApplicationSessionBuilder<TSession, TBuilder> : AtataSe
 
         _sessionStartAction = session =>
         {
-            WebApplicationFactory<TEntryPoint> originalWebApplicationFactory = webApplicationFactoryCreator.Invoke();
-            WebApplicationFactory<TEntryPoint> webApplicationFactory = originalWebApplicationFactory
-                .WithWebHostBuilder(builder => ConfigureWebHost(builder, session));
+            void ConfigureWebApplicationFactory(IWebHostBuilder builder) =>
+                ConfigureWebHost(builder, session);
 
-            session.Server = webApplicationFactory.Server;
+            WebApplicationFactory<TEntryPoint> webApplicationFactory = webApplicationFactoryCreator.Invoke();
+
+            WebApplicationFactoryUtils.AddConfigurationDelegate(webApplicationFactory, ConfigureWebApplicationFactory);
+
+#if NET10_0_OR_GREATER
+            bool useKestrel = _useKestrel;
+
+            if (useKestrel)
+            {
+                webApplicationFactory.UseKestrel();
+
+                if (_kestrelPort is not null)
+                    webApplicationFactory.UseKestrel(_kestrelPort.Value);
+
+                if (_configureKestrelOptions is not null)
+                    webApplicationFactory.UseKestrel(_configureKestrelOptions);
+            }
+
+            webApplicationFactory.StartServer();
+#else
+            bool useKestrel = false;
+#endif
+
+            if (!useKestrel)
+            {
+                try
+                {
+                    session.TestServer = webApplicationFactory.Server;
+                }
+                catch
+                {
+                    // Unexpected error. Ignore. TestServer property will be null.
+                }
+            }
+
             session.Services = webApplicationFactory.Services;
             session.ClientOptions = webApplicationFactory.ClientOptions;
             session.CreateClientFunction = webApplicationFactory.CreateClient;
@@ -135,7 +176,7 @@ public abstract class WebApplicationSessionBuilder<TSession, TBuilder> : AtataSe
             session.CreateDefaultClientWithBaseAddressFunction = webApplicationFactory.CreateDefaultClient;
 
             if (DisposeWebApplicationFactory)
-                session.WebApplicationFactoryToDispose = originalWebApplicationFactory;
+                session.WebApplicationFactoryToDispose = webApplicationFactory;
         };
 
         return (TBuilder)this;
@@ -153,6 +194,47 @@ public abstract class WebApplicationSessionBuilder<TSession, TBuilder> : AtataSe
         _webHostConfigurationActions.Add(configure);
         return (TBuilder)this;
     }
+
+#if NET10_0_OR_GREATER
+    /// <summary>
+    /// Sets a value indicating whether to use Kestrel as the server.
+    /// The default value is <see langword="false"/>.
+    /// </summary>
+    /// <param name="useKestrel">Whether to use Kestrel.</param>
+    /// <returns>The same <typeparamref name="TBuilder"/> instance.</returns>
+    public TBuilder UseKestrel(bool useKestrel = true)
+    {
+        _useKestrel = useKestrel;
+
+        return (TBuilder)this;
+    }
+
+    /// <summary>
+    /// Configures the builder to use Kestrel as the server on the specified <paramref name="port"/>.
+    /// </summary>
+    /// <param name="port">The port to listen to when the server starts. Use `0` to allow dynamic port selection.</param>
+    /// <returns>The same <typeparamref name="TBuilder"/> instance.</returns>
+    public TBuilder UseKestrel(int port)
+    {
+        _useKestrel = true;
+        _kestrelPort = port;
+
+        return (TBuilder)this;
+    }
+
+    /// <summary>
+    /// Configures the factory to use Kestrel as the server.
+    /// </summary>
+    /// <param name="configureKestrelOptions">A callback handler that will be used for configuring the server when it starts.</param>
+    /// <returns>The same <typeparamref name="TBuilder"/> instance.</returns>
+    public TBuilder UseKestrel(Action<KestrelServerOptions> configureKestrelOptions)
+    {
+        _useKestrel = true;
+        _configureKestrelOptions = configureKestrelOptions;
+
+        return (TBuilder)this;
+    }
+#endif
 
     /// <summary>
     /// Sets a value indicating whether to dispose the <see cref="WebApplicationFactory{TEntryPoint}"/>

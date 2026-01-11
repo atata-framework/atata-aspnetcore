@@ -11,6 +11,16 @@ public class WebApplicationSession : AtataSession
     public WebApplicationSession() =>
         _fakeLogCollector = new(ResolveFakeLogCollector);
 
+    /// <summary>
+    /// Gets the <see cref="System.Uri"/> of the started web application.
+    /// </summary>
+    public Uri Uri { get; internal set; } = null!;
+
+    /// <summary>
+    /// Gets the URL string of the started web application.
+    /// </summary>
+    public string Url { get; internal set; } = null!;
+
 #if NET10_0_OR_GREATER
     /// <summary>
     /// Gets the <see cref="Microsoft.AspNetCore.TestHost.TestServer"/> instance associated with the session.
@@ -81,6 +91,7 @@ public class WebApplicationSession : AtataSession
 
     /// <summary>
     /// Configures the web host builder for the session.
+    /// Override this method to customize the <see cref="IWebHostBuilder"/> used to create the application.
     /// </summary>
     /// <param name="builder">The web host builder to configure.</param>
     protected internal virtual void ConfigureWebHost(IWebHostBuilder builder)

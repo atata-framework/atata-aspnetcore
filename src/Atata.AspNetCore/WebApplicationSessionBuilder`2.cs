@@ -175,6 +175,9 @@ public abstract class WebApplicationSessionBuilder<TSession, TBuilder> : AtataSe
             session.CreateDefaultClientFunction = webApplicationFactory.CreateDefaultClient;
             session.CreateDefaultClientWithBaseAddressFunction = webApplicationFactory.CreateDefaultClient;
 
+            session.Uri = webApplicationFactory.ClientOptions.BaseAddress;
+            session.Url = webApplicationFactory.ClientOptions.BaseAddress.ToString();
+
             if (DisposeWebApplicationFactory)
                 session.WebApplicationFactoryToDispose = webApplicationFactory;
         };

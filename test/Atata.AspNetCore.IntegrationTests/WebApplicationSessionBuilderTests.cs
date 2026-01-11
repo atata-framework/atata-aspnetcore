@@ -153,6 +153,8 @@ public class WebApplicationSessionBuilderTests : AtataTestSuite
             await TestSessionAsync(sut);
 
             Uri defaultKestrelUri = new("http://localhost:5000/");
+            sut.ValueOf(x => x.Uri).Should.Be(defaultKestrelUri);
+            sut.ValueOf(x => x.Url).Should.Be(defaultKestrelUri.ToString());
             sut.ValueOf(x => x.CreateDefaultClient().BaseAddress).Should.Be(defaultKestrelUri);
             sut.ValueOf(x => x.ClientOptions.BaseAddress).Should.Be(defaultKestrelUri);
         }
@@ -187,6 +189,7 @@ public class WebApplicationSessionBuilderTests : AtataTestSuite
             sut.ValueOf(x => x.Services.GetRequiredService<IConfiguration>()[CustomWebApplicationFactory.CustomSetting.Key])
                 .Should.Be(CustomWebApplicationFactory.CustomSetting.Value);
 
+            sut.ValueOf(x => x.Uri.Port).Should.Be(25432);
             sut.ValueOf(x => x.CreateDefaultClient().BaseAddress!.Port).Should.Be(25432);
             sut.ValueOf(x => x.ClientOptions.BaseAddress.Port).Should.Be(25432);
         }

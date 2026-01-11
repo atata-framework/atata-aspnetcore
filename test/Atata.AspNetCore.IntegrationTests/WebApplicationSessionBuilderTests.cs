@@ -152,8 +152,9 @@ public class WebApplicationSessionBuilderTests : AtataTestSuite
             // Assert
             await TestSessionAsync(sut);
 
-            sut.ValueOf(x => x.CreateDefaultClient().BaseAddress!.Port).Should.Not.Be(80);
-            sut.ValueOf(x => x.ClientOptions.BaseAddress.Port).Should.Not.Be(80);
+            Uri defaultKestrelUri = new("http://localhost:5000/");
+            sut.ValueOf(x => x.CreateDefaultClient().BaseAddress).Should.Be(defaultKestrelUri);
+            sut.ValueOf(x => x.ClientOptions.BaseAddress).Should.Be(defaultKestrelUri);
         }
 
         [Test]

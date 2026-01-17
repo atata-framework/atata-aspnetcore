@@ -18,7 +18,7 @@ The package targets .NET 10.0.
   <ItemGroup>
     <PackageReference Include="Atata" Version="4.0.0-beta.11" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="10.0.2" />
-    <PackageReference Include="Microsoft.Extensions.Diagnostics.Testing" Version="10.1.0" />
+    <PackageReference Include="Microsoft.Extensions.Diagnostics.Testing" Version="10.2.0" />
   </ItemGroup>
 
 </Project>

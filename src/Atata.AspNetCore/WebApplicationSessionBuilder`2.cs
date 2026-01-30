@@ -135,51 +135,58 @@ public abstract class WebApplicationSessionBuilder<TSession, TBuilder> : AtataSe
 
             WebApplicationFactory<TEntryPoint> webApplicationFactory = webApplicationFactoryCreator.Invoke();
 
-            WebApplicationFactoryUtils.AddConfigurationDelegate(webApplicationFactory, ConfigureWebApplicationFactory);
+            try
+            {
+                WebApplicationFactoryUtils.AddConfigurationDelegate(webApplicationFactory, ConfigureWebApplicationFactory);
 
 #if NET10_0_OR_GREATER
-            bool useKestrel = _useKestrel;
+                bool useKestrel = _useKestrel;
 
-            if (useKestrel)
-            {
-                webApplicationFactory.UseKestrel();
+                if (useKestrel)
+                {
+                    webApplicationFactory.UseKestrel();
 
-                if (_kestrelPort is not null)
-                    webApplicationFactory.UseKestrel(_kestrelPort.Value);
+                    if (_kestrelPort is not null)
+                        webApplicationFactory.UseKestrel(_kestrelPort.Value);
 
-                if (_configureKestrelOptions is not null)
-                    webApplicationFactory.UseKestrel(_configureKestrelOptions);
-            }
+                    if (_configureKestrelOptions is not null)
+                        webApplicationFactory.UseKestrel(_configureKestrelOptions);
+                }
 
-            webApplicationFactory.StartServer();
+                webApplicationFactory.StartServer();
 #else
-            bool useKestrel = false;
+                bool useKestrel = false;
 #endif
 
-            if (!useKestrel)
+                if (!useKestrel)
+                    session.TestServer = webApplicationFactory.Server;
+
+                session.Services = webApplicationFactory.Services;
+                session.ClientOptions = webApplicationFactory.ClientOptions;
+                session.CreateClientFunction = webApplicationFactory.CreateClient;
+                session.CreateClientWithOptionsFunction = webApplicationFactory.CreateClient;
+                session.CreateDefaultClientFunction = webApplicationFactory.CreateDefaultClient;
+                session.CreateDefaultClientWithBaseAddressFunction = webApplicationFactory.CreateDefaultClient;
+
+                session.Uri = webApplicationFactory.ClientOptions.BaseAddress;
+                session.Url = webApplicationFactory.ClientOptions.BaseAddress.ToString();
+
+                if (DisposeWebApplicationFactory)
+                    session.WebApplicationFactoryToDispose = webApplicationFactory;
+            }
+            catch
             {
                 try
                 {
-                    session.TestServer = webApplicationFactory.Server;
+                    webApplicationFactory.Dispose();
                 }
                 catch
                 {
-                    // Unexpected error. Ignore. TestServer property will be null.
+                    // Ignore.
                 }
+
+                throw;
             }
-
-            session.Services = webApplicationFactory.Services;
-            session.ClientOptions = webApplicationFactory.ClientOptions;
-            session.CreateClientFunction = webApplicationFactory.CreateClient;
-            session.CreateClientWithOptionsFunction = webApplicationFactory.CreateClient;
-            session.CreateDefaultClientFunction = webApplicationFactory.CreateDefaultClient;
-            session.CreateDefaultClientWithBaseAddressFunction = webApplicationFactory.CreateDefaultClient;
-
-            session.Uri = webApplicationFactory.ClientOptions.BaseAddress;
-            session.Url = webApplicationFactory.ClientOptions.BaseAddress.ToString();
-
-            if (DisposeWebApplicationFactory)
-                session.WebApplicationFactoryToDispose = webApplicationFactory;
         };
 
         return (TBuilder)this;

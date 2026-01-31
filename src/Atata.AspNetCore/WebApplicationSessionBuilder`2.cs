@@ -233,7 +233,7 @@ public abstract class WebApplicationSessionBuilder<TSession, TBuilder> : AtataSe
     }
 
     /// <summary>
-    /// Configures the factory to use Kestrel as the server.
+    /// Configures the builder to use Kestrel as the server.
     /// </summary>
     /// <param name="configureKestrelOptions">A callback handler that will be used for configuring the server when it starts.</param>
     /// <returns>The same <typeparamref name="TBuilder"/> instance.</returns>
@@ -243,6 +243,18 @@ public abstract class WebApplicationSessionBuilder<TSession, TBuilder> : AtataSe
         _configureKestrelOptions = configureKestrelOptions;
 
         return (TBuilder)this;
+    }
+
+    /// <summary>
+    /// Configures the builder to start only when the Kestrel server port is available.
+    /// </summary>
+    /// <returns>The same <typeparamref name="TBuilder"/> instance.</returns>
+    public TBuilder UseStartWhenKestrelPortIsAvailable()
+    {
+        if (_kestrelPort is null)
+            throw new InvalidOperationException("Kestrel port is not set. Use 'UseKestrel(int port)' method to set it first.");
+
+        return UseStartWhenPortIsAvailable(_kestrelPort.Value);
     }
 #endif
 

@@ -3,7 +3,8 @@
 namespace Atata;
 
 /// <summary>
-/// A set of extension methods for <see cref="AtataSessionsBuilder"/> to add and configure <see cref="WebApplicationSessionBuilder"/> session builders.
+/// A set of extension methods for <see cref="AtataSessionsBuilder"/> to add and configure
+/// <see cref="WebApplicationSessionBuilder"/> and <see cref="WebApplicationSessionBuilder{TSession}"/> session builders.
 /// </summary>
 public static class WebApplicationSessionAtataSessionsBuilderExtensions
 {

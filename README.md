@@ -1,6 +1,9 @@
 # Atata.AspNetCore
 
-[![NuGet](http://img.shields.io/nuget/v/Atata.AspNetCore.svg?style=flat)](https://www.nuget.org/packages/Atata.AspNetCore/)
+| v8 | v9 | v10 |
+| -- | -- | --- |
+| [![NuGet](http://img.shields.io/nuget/v/Atata.AspNetCore.v8.svg?style=flat)](https://www.nuget.org/packages/Atata.AspNetCore.v8/) | [![NuGet](http://img.shields.io/nuget/v/Atata.AspNetCore.v9.svg?style=flat)](https://www.nuget.org/packages/Atata.AspNetCore.v9/) | [![NuGet](http://img.shields.io/nuget/v/Atata.AspNetCore.v10.svg?style=flat)](https://www.nuget.org/packages/Atata.AspNetCore.v10/) |
+
 [![GitHub release](https://img.shields.io/github/release/atata-framework/atata-aspnetcore.svg)](https://github.com/atata-framework/atata-aspnetcore/releases)
 [![Build status](https://dev.azure.com/atata-framework/atata/_apis/build/status/atata-aspnetcore-ci?branchName=main)](https://dev.azure.com/atata-framework/atata/_build/latest?definitionId=65&branchName=main)
 [![Atata Templates](https://img.shields.io/badge/get-Atata_Templates-green.svg?color=4BC21F)](https://marketplace.visualstudio.com/items?itemName=YevgeniyShunevych.AtataTemplates)\

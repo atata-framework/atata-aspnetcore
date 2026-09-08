@@ -9,6 +9,9 @@
     <File Path="azure-pipelines.release.v9.yml" />
     <File Path="azure-pipelines.runsettings" />
     <File Path="azure-pipelines.yml" />
+    <File Path="CHANGELOG.v10.md" />
+    <File Path="CHANGELOG.v8.md" />
+    <File Path="CHANGELOG.v9.md" />
     <File Path="CODE_OF_CONDUCT.md" />
     <File Path="CONTRIBUTING.md" />
     <File Path="Directory.Build.props" />

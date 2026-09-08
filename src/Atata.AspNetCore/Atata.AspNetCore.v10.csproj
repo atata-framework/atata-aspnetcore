@@ -14,7 +14,7 @@ The package targets .NET 10.0.
     <RepositoryUrl>https://github.com/atata-framework/atata-aspnetcore</RepositoryUrl>
     <PackageId>Atata.AspNetCore.v10</PackageId>
     <PackageTags>atata automation testing test aspnetcore aspnetcoremvc aspnetcoremvctesting</PackageTags>
-    <PackageReleaseNotes></PackageReleaseNotes>
+    <PackageReleaseNotes>Changelog: https://github.com/atata-framework/atata-aspnetcore/blob/main/CHANGELOG.v10.md</PackageReleaseNotes>
     <PackageProjectUrl>https://github.com/atata-framework/atata-aspnetcore</PackageProjectUrl>
   </PropertyGroup>
 
